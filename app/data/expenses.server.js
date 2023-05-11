@@ -10,7 +10,6 @@ export async function addExpense(expenseData) {
       },
     });
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }
@@ -23,7 +22,6 @@ export async function getExpenses() {
 
     return expenses;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }
@@ -33,7 +31,6 @@ export async function getExpense(id) {
     const expense = await prisma.expense.findFirst({ where: { id } });
     return expense;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }
@@ -51,5 +48,15 @@ export async function updateExpense(id, expenseData) {
   } catch (err) {
     console.log(err);
     throw err;
+  }
+}
+
+export async function deleteExpense(id) {
+  try {
+    await prisma.expense.delete({
+      where: { id: 'abc' },
+    });
+  } catch (error) {
+    throw error;
   }
 }
