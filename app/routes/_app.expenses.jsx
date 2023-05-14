@@ -9,6 +9,8 @@ import { getExpenses } from '../data/expenses.server';
 export default function Expenses() {
   const expenses = useLoaderData();
 
+  const hasExpenses = expenses && expenses.length > 0;
+
   return (
     <>
       <Outlet />
@@ -23,7 +25,15 @@ export default function Expenses() {
             <span>Load Raw Data</span>
           </a>
         </section>
-        <ExpensesList expenses={expenses} />
+        {hasExpenses && <ExpensesList expenses={expenses} />}
+        {!hasExpenses && (
+          <section id="no-expenses">
+            <h1>No Expenses found</h1>
+            <p>
+              Start <Link to="add">add some </Link>today.
+            </p>
+          </section>
+        )}
       </main>
     </>
   );
@@ -33,6 +43,21 @@ export function links() {
   return [{ rel: 'stylesheet', href: expensesStyles }];
 }
 
-export function loader() {
-  return getExpenses();
+export async function loader() {
+  const expenses = await getExpenses();
+
+  return expenses;
+
+  // if (!expenses || expenses.length === 0) {
+  //   throw json(
+  //     {
+  //       message: `Could not find any expenses.`,
+  //     },
+  //     { status: 404, statusText: 'No expenses found' }
+  //   );
+  // }
 }
+
+// export function ErrorBoundary() {
+//   return <p>Error</p>;
+// }
