@@ -18,7 +18,10 @@ function ExpenseForm() {
     (match) => match.id === 'routes/_app.expenses'
   ).data;
 
-  const expenseData = expenses.find((expense) => expense.id === params.id);
+  const expenseData = expenses.find((expense) => {
+    console.log(params, expense);
+    return expense.id === params.id;
+  });
 
   const navigation = useNavigation();
 
