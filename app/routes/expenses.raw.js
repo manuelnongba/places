@@ -1,3 +1,6 @@
+import { requireUserSession } from '../data/auth.server';
+import { getExpenses } from '../data/expenses.server';
+
 //A loader is triggered whenever a get request reaches this route
 const DUMMY_EXPENSES = [
   {
@@ -14,6 +17,7 @@ const DUMMY_EXPENSES = [
   },
 ];
 
-export function loader() {
-  return DUMMY_EXPENSES;
+export async function loader({ request }) {
+  const userId = await requireUserSession(request);
+  return getExpenses(userId);
 }

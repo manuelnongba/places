@@ -5,6 +5,7 @@ import expensesStyles from '~/styles/expenses.css';
 import ExpensesList from '../components/expenses/ExpensesList';
 import { FaDownload, FaPlus } from 'react-icons/fa';
 import { getExpenses } from '../data/expenses.server';
+import { requireUserSession } from '../data/auth.server';
 
 export default function Expenses() {
   const expenses = useLoaderData();
@@ -43,8 +44,10 @@ export function links() {
   return [{ rel: 'stylesheet', href: expensesStyles }];
 }
 
-export async function loader() {
-  const expenses = await getExpenses();
+export async function loader({ request }) {
+  const userId = await requireUserSession(request);
+
+  const expenses = await getExpenses(userId);
 
   return expenses;
 
