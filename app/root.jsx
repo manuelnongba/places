@@ -43,7 +43,6 @@ export default function App() {
 
 export function ErrorBoundary() {
   const caughtResponse = useRouteError();
-  console.log(isRouteErrorResponse(caughtResponse));
 
   if (isRouteErrorResponse(caughtResponse)) {
     return (

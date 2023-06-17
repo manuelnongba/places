@@ -19,6 +19,8 @@ function AuthForm() {
 
   const isSubmitting = navigation.state !== 'idle';
 
+  console.log(isSubmitting);
+
   return (
     <Form method="post" className="form" id="auth-form">
       <div className="icon-img">
