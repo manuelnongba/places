@@ -1,11 +1,11 @@
 import { Outlet } from '@remix-run/react';
 import expensesStyles from '~/styles/expenses.css';
-import ExpensesHeader from '../components/navigation/ExpensesHeader';
+import BudgetHeader from '../components/navigation/BugdetHeader';
 
-export default function ExpensesAppLayout() {
+export default function BudgetAppLayout() {
   return (
     <>
-      <ExpensesHeader />
+      <BudgetHeader />
       <Outlet />
     </>
   );

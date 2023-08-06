@@ -27,10 +27,10 @@
   background-color: var(--color-gray-100);
 }
 
-#expenses-actions a:last-of-type {
+/* #expenses-actions a:last-of-type {
   background-color: transparent;
   color: var(--color-gray-10);
-}
+} */
 
 #expenses-actions a:last-of-type:hover {
   background-color: transparent;

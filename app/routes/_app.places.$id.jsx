@@ -1,11 +1,11 @@
 import { useNavigate } from '@remix-run/react';
-import ExpenseForm from '../components/expenses/ExpenseForm';
 import Modal from '../components/util/Modal';
 import { deleteExpense, updateExpense } from '../data/expenses.server';
 import { redirect } from '@remix-run/node';
 import { validateExpenseInput } from '../data/validation.server';
+import BudgetForm from '../components/expenses/PlacesForm';
 
-export default function UpdateExpensesPage() {
+export default function UpdatePlacesPage() {
   const navigate = useNavigate();
 
   function closeHandler() {
@@ -13,7 +13,7 @@ export default function UpdateExpensesPage() {
   }
   return (
     <Modal onClose={closeHandler}>
-      <ExpenseForm />
+      <BudgetForm />
     </Modal>
   );
 }
@@ -26,24 +26,24 @@ export default function UpdateExpensesPage() {
 // }
 
 export async function action({ params, request }) {
-  const expenseId = params.id;
+  const budgetId = params.id;
 
   if (request.method === 'PATCH') {
     const formData = await request.formData();
-    const expenseData = Object.fromEntries(formData);
+    const budgetData = Object.fromEntries(formData);
 
     try {
-      validateExpenseInput(expenseData);
+      validateExpenseInput(budgetData);
     } catch (error) {
       return error;
     }
 
-    await updateExpense(expenseId, expenseData);
-    return redirect('/expenses');
+    await updateExpense(budgetId, budgetData);
+    return redirect('/budgets');
   } else if (request.method === 'DELETE') {
-    await deleteExpense(expenseId);
+    await deleteExpense(budgetId);
 
     // return redirect('/expenses');
-    return { deleteId: expenseId };
+    return { deleteId: budgetId };
   }
 }

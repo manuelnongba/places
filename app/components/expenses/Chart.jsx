@@ -1,6 +1,6 @@
 import ChartBar from './ChartBar';
 
-function Chart({ expenses }) {
+function Chart({ places }) {
   const chartDataPoints = [
     { label: 'Jan', value: 0 },
     { label: 'Feb', value: 0 },
@@ -16,9 +16,9 @@ function Chart({ expenses }) {
     { label: 'Dec', value: 0 },
   ];
 
-  for (const expense of expenses) {
-    const expenseMonth = new Date(expense.date).getMonth(); // starting at 0 => January => 0
-    chartDataPoints[expenseMonth].value += expense.amount;
+  for (const place of places) {
+    const expenseMonth = new Date(place.date).getMonth(); // starting at 0 => January => 0
+    chartDataPoints[expenseMonth].value += place.amount;
   }
 
   const dataPointValues = chartDataPoints.map((dataPoint) => dataPoint.value);
@@ -27,7 +27,7 @@ function Chart({ expenses }) {
   return (
     <section>
       <h2>Monthly Expenses</h2>
-      <ol className='chart'>
+      <ol className="chart">
         {chartDataPoints.map((dataPoint) => (
           <ChartBar
             key={dataPoint.label}

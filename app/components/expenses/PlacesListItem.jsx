@@ -1,6 +1,6 @@
 import { Link, useFetcher } from '@remix-run/react';
 
-function ExpenseListItem({ id, title, amount }) {
+function PlacesListItem({ id, title, amount }) {
   // const submit = useSubmit();
 
   //used to load or submitting requests without triggering navigation actions
@@ -16,7 +16,7 @@ function ExpenseListItem({ id, title, amount }) {
     //   });
     if (!proceed) return;
 
-    fetcher.submit(null, { method: 'delete', action: `/expenses/${id}` });
+    fetcher.submit(null, { method: 'delete', action: `/budgets/${id}` });
   }
 
   if (fetcher.state !== 'idle') {
@@ -44,4 +44,4 @@ function ExpenseListItem({ id, title, amount }) {
   );
 }
 
-export default ExpenseListItem;
+export default PlacesListItem;

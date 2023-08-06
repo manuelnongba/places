@@ -1,16 +1,13 @@
 import { Link, Outlet, useLoaderData } from '@remix-run/react';
-
 import expensesStyles from '~/styles/expenses.css';
-
-import ExpensesList from '../components/expenses/ExpensesList';
-import { FaDownload, FaPlus } from 'react-icons/fa';
 import { getExpenses } from '../data/expenses.server';
 import { requireUserSession } from '../data/auth.server';
+import PlacesList from '../components/expenses/PlacesList';
+import { FaPlus } from 'react-icons/fa';
 
-export default function Expenses() {
-  const expenses = useLoaderData();
-
-  const hasExpenses = expenses && expenses.length > 0;
+export default function Places() {
+  const places = useLoaderData();
+  const hasExpenses = places && places.length > 0;
 
   return (
     <>
@@ -19,17 +16,17 @@ export default function Expenses() {
         <section id="expenses-actions">
           <Link to="add">
             <FaPlus />
-            <span>Add Expense</span>
+            <span>Add Place</span>
           </Link>
-          <a href="/expenses/raw">
+          {/* <a href="/places/raw">
             <FaDownload />
             <span>Load Raw Data</span>
-          </a>
+          </a> */}
         </section>
-        {hasExpenses && <ExpensesList expenses={expenses} />}
+        {hasExpenses && <PlacesList places={places} />}
         {!hasExpenses && (
           <section id="no-expenses">
-            <h1>No Expenses found</h1>
+            <h1>No Places found</h1>
             <p>
               Start <Link to="add">add some </Link>today.
             </p>

@@ -7,7 +7,7 @@ import {
   useParams,
 } from '@remix-run/react';
 
-function ExpenseForm() {
+function BudgetForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
   const validationErrors = useActionData();
   // const expenseData = useLoaderData();
@@ -15,7 +15,7 @@ function ExpenseForm() {
   const params = useParams();
 
   const expenses = matches.find(
-    (match) => match.id === 'routes/_app.expenses'
+    (match) => match.id === 'routes/_app.places'
   ).data;
 
   const expenseData = expenses.find((expense) => {
@@ -51,7 +51,7 @@ function ExpenseForm() {
       // onSubmit={submitHandler}
     >
       <p>
-        <label htmlFor="title">Expense Title</label>
+        <label htmlFor="title">Place</label>
         <input
           type="text"
           id="title"
@@ -64,7 +64,7 @@ function ExpenseForm() {
 
       <div className="form-row">
         <p>
-          <label htmlFor="amount">Amount</label>
+          <label htmlFor="amount">Budget</label>
           <input
             type="number"
             id="amount"
@@ -106,4 +106,4 @@ function ExpenseForm() {
   );
 }
 
-export default ExpenseForm;
+export default BudgetForm;

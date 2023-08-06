@@ -2,19 +2,19 @@ import { Form, NavLink } from '@remix-run/react';
 
 import Logo from '../util/Logo';
 
-function ExpensesHeader() {
+function BudgetHeader() {
   return (
     <header id="main-header">
       <Logo />
       <nav id="main-nav">
         <ul>
           <li>
-            <NavLink to="/expenses" end>
-              Manage Expenses
+            <NavLink to="/places" end>
+              Manage Budget
             </NavLink>
           </li>
           <li>
-            <NavLink to="/expenses/analysis">Analyze Expenses</NavLink>
+            <NavLink to="/places/analysis">Analyze Budget</NavLink>
           </li>
         </ul>
       </nav>
@@ -27,4 +27,4 @@ function ExpensesHeader() {
   );
 }
 
-export default ExpensesHeader;
+export default BudgetHeader;
