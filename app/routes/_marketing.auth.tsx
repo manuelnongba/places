@@ -2,18 +2,19 @@ import authStyles from '~/styles/auth.css';
 import AuthForm from '../components/auth/AuthForm';
 import { validateCredentials } from '../data/validation.server';
 import { login, signup } from '../data/auth.server';
+import type { DataFunctionArgs } from '@remix-run/node';
 
 export default function Auth() {
   return <AuthForm />;
 }
 
-export async function action({ request }) {
+export async function action({ request }: DataFunctionArgs) {
   const searchParams = new URL(request.url).searchParams;
   const authMode = searchParams.get('mode') || 'login';
 
   const formData = await request.formData();
 
-  const credentials = Object.fromEntries(formData);
+  const credentials: any = Object.fromEntries(formData);
 
   try {
     validateCredentials(credentials);
@@ -30,7 +31,7 @@ export async function action({ request }) {
       //sign up logic
       return await signup(credentials);
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error.status === 422) return { credentials: error.message };
   }
 }

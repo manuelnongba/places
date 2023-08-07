@@ -11,9 +11,10 @@ import {
 } from '@remix-run/react';
 
 import sharedStyles from '~/styles/shared.css';
+
 import Error from './components/util/Error';
 
-function Document({ title, children }) {
+function Document({ title, children }: any) {
   return (
     <html lang="en">
       <head>

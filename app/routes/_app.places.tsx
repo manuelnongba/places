@@ -4,6 +4,7 @@ import { getExpenses } from '../data/expenses.server';
 import { requireUserSession } from '../data/auth.server';
 import PlacesList from '../components/expenses/PlacesList';
 import { FaPlus } from 'react-icons/fa';
+import type { DataFunctionArgs } from '@remix-run/node';
 
 export default function Places() {
   const places = useLoaderData();
@@ -41,7 +42,7 @@ export function links() {
   return [{ rel: 'stylesheet', href: expensesStyles }];
 }
 
-export async function loader({ request }) {
+export async function loader({ request }: DataFunctionArgs) {
   const userId = await requireUserSession(request);
 
   const expenses = await getExpenses(userId);

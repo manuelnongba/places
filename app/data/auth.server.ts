@@ -3,7 +3,12 @@ import { createCookieSessionStorage, redirect } from '@remix-run/node';
 
 import { prisma } from './database.server.js';
 
-const SESSION_SECRET = process.env.SESSION_SECRET;
+const SESSION_SECRET: string = process.env.SESSION_SECRET!;
+
+interface Credentials {
+  email: string | any;
+  password: string;
+}
 
 const sessionStorage = createCookieSessionStorage({
   cookie: {
@@ -15,7 +20,7 @@ const sessionStorage = createCookieSessionStorage({
   },
 });
 
-async function createUserSession(userId, redirectPath) {
+async function createUserSession(userId: string, redirectPath: string) {
   const session = await sessionStorage.getSession();
   session.set('userId', userId);
   return redirect(redirectPath, {
@@ -25,7 +30,7 @@ async function createUserSession(userId, redirectPath) {
   });
 }
 
-export async function getUserFromSession(request) {
+export async function getUserFromSession(request: any) {
   const session = await sessionStorage.getSession(
     request.headers.get('Cookie')
   );
@@ -39,7 +44,7 @@ export async function getUserFromSession(request) {
   return userId;
 }
 
-export async function destroyUserSession(request) {
+export async function destroyUserSession(request: any) {
   const session = await sessionStorage.getSession(
     request.headers.get('Cookie')
   );
@@ -51,7 +56,7 @@ export async function destroyUserSession(request) {
   });
 }
 
-export async function requireUserSession(request) {
+export async function requireUserSession(request: any) {
   const userId = await getUserFromSession(request);
 
   if (!userId) throw redirect('/auth?mode=login');
@@ -59,11 +64,11 @@ export async function requireUserSession(request) {
   return userId;
 }
 
-export async function signup({ email, password }) {
+export async function signup({ email, password }: Credentials) {
   const existingUser = await prisma.user.findFirst({ where: { email } });
 
   if (existingUser) {
-    const error = new Error(
+    const error: any = new Error(
       `A user with the provided email address exists already.`
     );
     error.status = 422;
@@ -76,14 +81,14 @@ export async function signup({ email, password }) {
     data: { email: email, password: passwordHash },
   });
 
-  return createUserSession(user.id, '/expenses');
+  return createUserSession(user.id, '/places');
 }
 
-export async function login({ email, password }) {
+export async function login({ email, password }: any) {
   const existingUser = await prisma.user.findFirst({ where: { email } });
 
   if (!existingUser) {
-    const error = new Error(
+    const error: any = new Error(
       `Could not log you in, please check the provided credentials`
     );
     error.status = 401;
@@ -93,12 +98,12 @@ export async function login({ email, password }) {
   const passwordCorrect = await compare(password, existingUser.password);
 
   if (!passwordCorrect) {
-    const error = new Error(
+    const error: any = new Error(
       `Could not log you in, please check the provided credentials`
     );
     error.status = 401;
     throw error;
   }
 
-  return createUserSession(existingUser.id, '/expenses');
+  return createUserSession(existingUser.id, '/places');
 }

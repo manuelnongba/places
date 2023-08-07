@@ -1,4 +1,5 @@
 import { json } from '@remix-run/node';
+import type { DataFunctionArgs } from '@remix-run/node';
 import Chart from '../components/expenses/Chart';
 import { getExpenses } from '../data/expenses.server';
 import { requireUserSession } from '../data/auth.server';
@@ -30,7 +31,7 @@ export default function PlacesAnalysisPage() {
   );
 }
 
-export async function loader({ request }) {
+export async function loader({ request }: DataFunctionArgs) {
   const userId = await requireUserSession(request);
 
   const expenses = await getExpenses(userId);

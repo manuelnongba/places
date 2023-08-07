@@ -1,18 +1,18 @@
-function isValidTitle(value) {
+function isValidTitle(value: string) {
   return value && value.trim().length > 0 && value.trim().length <= 30;
 }
 
-function isValidAmount(value) {
+function isValidAmount(value: string) {
   const amount = parseFloat(value);
   return !isNaN(amount) && amount > 0;
 }
 
-function isValidDate(value) {
+function isValidDate(value: string) {
   return value && new Date(value).getTime() < new Date().getTime();
 }
 
-export function validateExpenseInput(input) {
-  let validationErrors = {};
+export function validateExpenseInput(input: any) {
+  let validationErrors: any = {};
 
   if (!isValidTitle(input.title)) {
     validationErrors.title =
@@ -33,16 +33,16 @@ export function validateExpenseInput(input) {
   }
 }
 
-function isValidEmail(value) {
+function isValidEmail(value: string) {
   return value && value.includes('@');
 }
 
-function isValidPassword(value) {
+function isValidPassword(value: string) {
   return value && value.trim().length >= 7;
 }
 
-export function validateCredentials(input) {
-  let validationErrors = {};
+export function validateCredentials(input: any) {
+  let validationErrors: any = {};
 
   if (!isValidEmail(input.email)) {
     validationErrors.email = 'Invalid email address.';

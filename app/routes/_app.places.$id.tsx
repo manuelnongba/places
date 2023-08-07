@@ -2,6 +2,7 @@ import { useNavigate } from '@remix-run/react';
 import Modal from '../components/util/Modal';
 import { deleteExpense, updateExpense } from '../data/expenses.server';
 import { redirect } from '@remix-run/node';
+import type { DataFunctionArgs } from '@remix-run/node';
 import { validateExpenseInput } from '../data/validation.server';
 import BudgetForm from '../components/expenses/PlacesForm';
 
@@ -25,12 +26,12 @@ export default function UpdatePlacesPage() {
 //   return json(expense);
 // }
 
-export async function action({ params, request }) {
+export async function action({ params, request }: DataFunctionArgs) {
   const budgetId = params.id;
 
   if (request.method === 'PATCH') {
     const formData = await request.formData();
-    const budgetData = Object.fromEntries(formData);
+    const budgetData: any = Object.fromEntries(formData);
 
     try {
       validateExpenseInput(budgetData);

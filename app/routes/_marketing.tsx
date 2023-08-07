@@ -3,6 +3,7 @@ import marketingStyles from '~/styles/marketing.css';
 
 import MainHeader from '../components/navigation/MainHeader';
 import { getUserFromSession } from '../data/auth.server';
+import type { DataFunctionArgs } from '@remix-run/node';
 
 export default function MarketingLayout() {
   return (
@@ -13,7 +14,7 @@ export default function MarketingLayout() {
   );
 }
 
-export function loader({ request }) {
+export function loader({ request }: DataFunctionArgs) {
   return getUserFromSession(request);
 }
 
