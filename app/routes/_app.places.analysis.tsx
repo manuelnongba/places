@@ -23,6 +23,8 @@ import PlacesStatistics from '../components/expenses/PlacesStatistics';
 
 export default function PlacesAnalysisPage() {
   const places = useLoaderData();
+  console.log(places);
+
   return (
     <main>
       <Chart places={places} />

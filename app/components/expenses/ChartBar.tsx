@@ -1,4 +1,4 @@
-const ChartBar = ({ maxValue, value, label }) => {
+const ChartBar = ({ maxValue, value, label }: any) => {
   let barFillHeight = '0%';
 
   if (maxValue > 0) {

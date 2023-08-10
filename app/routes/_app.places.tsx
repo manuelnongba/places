@@ -6,8 +6,17 @@ import PlacesList from '../components/expenses/PlacesList';
 import { FaPlus } from 'react-icons/fa';
 import type { DataFunctionArgs } from '@remix-run/node';
 
+export interface PlacesInterfaces {
+  id: string;
+  title: string;
+  amount: number;
+  date: string;
+  dateAdded: string;
+  userId: string;
+}
+
 export default function Places() {
-  const places = useLoaderData();
+  const places: string[] = useLoaderData();
   const hasExpenses = places && places.length > 0;
 
   return (

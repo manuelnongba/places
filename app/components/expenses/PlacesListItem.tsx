@@ -1,6 +1,6 @@
 import { Link, useFetcher } from '@remix-run/react';
 
-function PlacesListItem({ id, title, amount }) {
+function PlacesListItem({ id, title, amount }: any) {
   // const submit = useSubmit();
 
   //used to load or submitting requests without triggering navigation actions

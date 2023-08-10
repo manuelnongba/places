@@ -1,4 +1,4 @@
-import { Form, Link, NavLink, useLoaderData } from '@remix-run/react';
+import { Form, Link, useLoaderData } from '@remix-run/react';
 import Logo from '../util/Logo';
 
 function MainHeader() {
@@ -8,14 +8,11 @@ function MainHeader() {
     <header id="main-header">
       <Logo />
       <nav id="main-nav">
-        <ul>
+        {/* <ul>
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
-          <li>
-            <NavLink to="/pricing">Pricing</NavLink>
-          </li>
-        </ul>
+        </ul> */}
       </nav>
       <nav id="cta-nav">
         <ul>

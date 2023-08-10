@@ -6,6 +6,7 @@ import {
   useNavigation,
   useParams,
 } from '@remix-run/react';
+import type { PlacesInterfaces } from '~/routes/_app.places';
 
 function BudgetForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
@@ -16,12 +17,14 @@ function BudgetForm() {
 
   const expenses = matches.find(
     (match) => match.id === 'routes/_app.places'
-  ).data;
+  )!.data;
 
-  const expenseData = expenses.find((expense) => {
-    console.log(params, expense);
-    return expense.id === params.id;
-  });
+  const expenseData: PlacesInterfaces = expenses.find(
+    (expense: PlacesInterfaces) => {
+      console.log(params, expense);
+      return expense.id === params.id;
+    }
+  );
 
   const navigation = useNavigation();
 
@@ -91,7 +94,7 @@ function BudgetForm() {
       </div>
       {validationErrors && (
         <ul>
-          {Object.values(validationErrors).map((err) => (
+          {Object.values(validationErrors).map((err: any) => (
             <li key={err}>{err} </li>
           ))}
         </ul>

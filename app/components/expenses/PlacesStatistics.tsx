@@ -1,16 +1,20 @@
 import { useMemo } from 'react';
+import { PlacesInterfaces } from '~/routes/_app.places';
 
-function calculateSummaryStatistics(places) {
-  const amounts = places.map((expense) => +expense.amount);
+function calculateSummaryStatistics(places: string[]) {
+  const amounts = places.map((place: any) => +place.amount);
   const maxAmount = Math.max(...amounts);
   const minAmount = Math.min(...amounts);
-  const sum = places.reduce((prevVal, curVal) => curVal.amount + prevVal, 0);
+  const sum = places.reduce(
+    (prevVal: any, curVal: any) => curVal.amount + prevVal,
+    0
+  );
   const mean = sum / places.length;
 
   return { minAmount, maxAmount, sum, mean };
 }
 
-function PlacesStatistics({ places }) {
+function PlacesStatistics({ places }: any) {
   const { minAmount, maxAmount, sum, mean } = useMemo(
     () => calculateSummaryStatistics(places),
     [places]

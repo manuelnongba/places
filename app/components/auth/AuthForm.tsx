@@ -9,15 +9,16 @@ import { FaLock, FaUserPlus } from 'react-icons/fa';
 
 function AuthForm() {
   const [searchParams] = useSearchParams();
-  const authMode = searchParams.get('mode') || 'login';
+  const authMode: string = searchParams.get('mode') || 'login';
   const navigation = useNavigation();
   const validationErrors = useActionData();
 
-  const submitBtnCaption = authMode === 'login' ? 'login' : 'Create User';
-  const toggleBtnCaption =
+  const submitBtnCaption: string =
+    authMode === 'login' ? 'login' : 'Create User';
+  const toggleBtnCaption: string =
     authMode === 'login' ? 'Create a new user' : 'Login with existing user';
 
-  const isSubmitting = navigation.state !== 'idle';
+  const isSubmitting: boolean = navigation.state !== 'idle';
 
   console.log(isSubmitting);
 

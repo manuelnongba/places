@@ -1,6 +1,6 @@
 import ChartBar from './ChartBar';
 
-function Chart({ places }) {
+function Chart({ places }: any) {
   const chartDataPoints = [
     { label: 'Jan', value: 0 },
     { label: 'Feb', value: 0 },
@@ -17,12 +17,14 @@ function Chart({ places }) {
   ];
 
   for (const place of places) {
-    const expenseMonth = new Date(place.date).getMonth(); // starting at 0 => January => 0
+    const expenseMonth: number = new Date(place.date).getMonth(); // starting at 0 => January => 0
     chartDataPoints[expenseMonth].value += place.amount;
   }
 
-  const dataPointValues = chartDataPoints.map((dataPoint) => dataPoint.value);
-  const totalMaximum = Math.max(...dataPointValues);
+  const dataPointValues: number[] = chartDataPoints.map(
+    (dataPoint) => dataPoint.value
+  );
+  const totalMaximum: number = Math.max(...dataPointValues);
 
   return (
     <section>
