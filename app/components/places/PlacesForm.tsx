@@ -6,7 +6,7 @@ import {
   useNavigation,
   useParams,
 } from '@remix-run/react';
-import type { PlacesInterfaces } from '~/routes/_app.places';
+import type { PlacesInterface } from '~/routes/_app.places';
 
 function BudgetForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
@@ -15,30 +15,28 @@ function BudgetForm() {
   const matches = useMatches();
   const params = useParams();
 
-  const expenses = matches.find(
+  const places = matches.find(
     (match) => match.id === 'routes/_app.places'
   )!.data;
 
-  const expenseData: PlacesInterfaces = expenses.find(
-    (expense: PlacesInterfaces) => {
-      console.log(params, expense);
-      return expense.id === params.id;
-    }
-  );
+  const placeData: PlacesInterface = places.find((expense: PlacesInterface) => {
+    console.log(params, expense);
+    return expense.id === params.id;
+  });
 
   const navigation = useNavigation();
 
-  if (params.id && !expenseData) {
+  if (params.id && !placeData) {
     return <p>Invalid Expense id</p>;
   }
 
   const isSubmitting = navigation.state !== 'idle';
 
-  const defaultValues = expenseData
+  const defaultValues = placeData
     ? {
-        title: expenseData.title,
-        amount: expenseData.amount,
-        date: expenseData.date,
+        title: placeData.title,
+        amount: placeData.amount,
+        date: placeData.date,
       }
     : {
         title: '',
@@ -48,7 +46,7 @@ function BudgetForm() {
 
   return (
     <Form
-      method={expenseData ? 'patch' : 'post'}
+      method={placeData ? 'patch' : 'post'}
       className="form"
       id="expense-form"
       // onSubmit={submitHandler}

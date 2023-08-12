@@ -1,12 +1,12 @@
 import { Link, Outlet, useLoaderData } from '@remix-run/react';
-import expensesStyles from '~/styles/expenses.css';
-import { getExpenses } from '../data/expenses.server';
+import expensesStyles from '~/styles/places.css';
+import { getExpenses } from '../data/places.server';
 import { requireUserSession } from '../data/auth.server';
-import PlacesList from '../components/expenses/PlacesList';
+import PlacesList from '../components/places/PlacesList';
 import { FaPlus } from 'react-icons/fa';
 import type { DataFunctionArgs } from '@remix-run/node';
 
-export interface PlacesInterfaces {
+export interface PlacesInterface {
   id: string;
   title: string;
   amount: number;

@@ -24,7 +24,7 @@
 }
 
 #expenses-actions a:hover {
-  background-color: var(--color-gray-100);
+  background-color: var(--color-secondary-500);
 }
 
 /* #expenses-actions a:last-of-type {
@@ -33,7 +33,8 @@
 } */
 
 #expenses-actions a:last-of-type:hover {
-  background-color: transparent;
+  /* background-color: transparent; */
+  background-color: var(--color-secondary-500);
   color: var(--color-gray-100);
 }
 

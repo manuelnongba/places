@@ -2,10 +2,13 @@
 
 import { PrismaClient } from '@prisma/client';
 
+declare global {
+  var __db: PrismaClient | undefined;
+}
 /**
  * @type PrismaClient
  */
-let prisma;
+let prisma: PrismaClient;
 
 if (process.env.NODE_ENV === 'production') {
   prisma = new PrismaClient();

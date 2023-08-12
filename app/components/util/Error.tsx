@@ -1,6 +1,6 @@
 import { FaExclamationCircle } from 'react-icons/fa';
 
-function Error({ title, children }) {
+function Error({ title, children }: any) {
   return (
     <div className="error">
       <div className="icon">

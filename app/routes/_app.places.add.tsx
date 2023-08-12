@@ -1,11 +1,11 @@
 import { useNavigate } from '@remix-run/react';
 import Modal from '../components/util/Modal';
-import { addExpense } from '../data/expenses.server';
+import { addExpense } from '../data/places.server';
 import { redirect } from '@remix-run/node';
 import type { DataFunctionArgs } from '@remix-run/node';
 import { validateExpenseInput } from '../data/validation.server';
 import { requireUserSession } from '../data/auth.server';
-import BudgetForm from '../components/expenses/PlacesForm';
+import BudgetForm from '../components/places/PlacesForm';
 
 export default function AddExpensesPage() {
   const navigate = useNavigate();

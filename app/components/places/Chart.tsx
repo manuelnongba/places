@@ -28,7 +28,7 @@ function Chart({ places }: any) {
 
   return (
     <section>
-      <h2>Monthly Expenses</h2>
+      <h2>Monthly Budget</h2>
       <ol className="chart">
         {chartDataPoints.map((dataPoint) => (
           <ChartBar

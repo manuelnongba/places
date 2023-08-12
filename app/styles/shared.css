@@ -15,19 +15,19 @@
   --color-gray-800: #403e44;
   --color-gray-900: #2e2c32;
 
-  --color-primary-10: #ede3fd;
+  --color-primary-10: #ebe7f1;
   --color-primary-50: #c9aaff;
   --color-primary-100: #af82fc;
   --color-primary-200: #975bfd;
-  --color-primary-300: #8845fc;
+  --color-primary-300: #2d2a34;
   --color-primary-400: #7223fa;
   --color-primary-500: #5d00ff;
   --color-primary-600: #5402e3;
   --color-primary-700: #4a02c6;
-  --color-primary-800: #3c02a1;
+  --color-primary-800: #1e1a24;
 
-  --color-secondary-500: #9900ff;
-  --color-secondary-600: #8400ff;
+  --color-secondary-500: #6e4eb9;
+  --color-secondary-600: #2b0251;
   --color-secondary-700: #7500ce;
 }
 
@@ -38,12 +38,9 @@ html {
 body {
   margin: 0;
   color: var(--color-gray-100);
-  background: radial-gradient(
-    ellipse at top left,
-    var(--color-primary-300),
-    var(--color-primary-800)
-  );
-  min-height: 100vh;
+  background: radial-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8)),
+    url('../../public/images/bg.jpg');
+  background-size: cover;
 }
 
 ul,
@@ -132,13 +129,13 @@ button {
   color: var(--color-primary-100);
 }
 
-#main-nav a {
-  color: var(--color-primary-100);
+#main-nav a,
+#main-nav a:hover {
+  color: var(--color-primary-10);
 }
 
-#main-nav a:hover,
 #main-nav a.active {
-  color: var(--color-primary-10);
+  color: var(--color-primary-100);
 }
 
 .form-actions {
@@ -236,7 +233,7 @@ button {
 }
 
 .form button:hover {
-  background-color: var(--color-secondary-600);
+  background-color: var(--color-primary-200);
 }
 
 .form button:disabled,

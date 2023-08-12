@@ -1,10 +1,10 @@
 import { json } from '@remix-run/node';
 import type { DataFunctionArgs } from '@remix-run/node';
-import Chart from '../components/expenses/Chart';
-import { getExpenses } from '../data/expenses.server';
+import Chart from '../components/places/Chart';
+import { getExpenses } from '../data/places.server';
 import { requireUserSession } from '../data/auth.server';
 import { useLoaderData } from '@remix-run/react';
-import PlacesStatistics from '../components/expenses/PlacesStatistics';
+import PlacesStatistics from '../components/places/PlacesStatistics';
 
 // const DUMMY_EXPENSES = [
 //   {
