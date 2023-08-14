@@ -8,10 +8,9 @@ import {
 } from '@remix-run/react';
 import type { PlacesInterface } from '~/routes/_app.places';
 
-function BudgetForm() {
+function PlaceForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
   const validationErrors = useActionData();
-  // const expenseData = useLoaderData();
   const matches = useMatches();
   const params = useParams();
 
@@ -19,15 +18,14 @@ function BudgetForm() {
     (match) => match.id === 'routes/_app.places'
   )!.data;
 
-  const placeData: PlacesInterface = places.find((expense: PlacesInterface) => {
-    console.log(params, expense);
-    return expense.id === params.id;
+  const placeData: PlacesInterface = places.find((place: PlacesInterface) => {
+    return place.id == params.id;
   });
 
   const navigation = useNavigation();
 
   if (params.id && !placeData) {
-    return <p>Invalid Expense id</p>;
+    return <p>Invalid Place id</p>;
   }
 
   const isSubmitting = navigation.state !== 'idle';
@@ -107,4 +105,4 @@ function BudgetForm() {
   );
 }
 
-export default BudgetForm;
+export default PlaceForm;

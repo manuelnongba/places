@@ -10,7 +10,7 @@ function PlacesListItem({ id, title, amount }: any) {
     const proceed = confirm('Are you sure? Do you want to delete this item?');
     if (!proceed) return;
 
-    fetcher.submit(null, { method: 'delete', action: `/budgets/${id}` });
+    fetcher.submit(null, { method: 'delete', action: `/places/${id}` });
   }
 
   if (fetcher.state !== 'idle') {
@@ -29,7 +29,7 @@ function PlacesListItem({ id, title, amount }: any) {
       </div>
       <menu className="expense-actions">
         <button onClick={deletePlaceItemHandler}>Delete</button>
-        <Link to={id}>Edit</Link>
+        <Link to={`/places/${id}`}>Edit</Link>
       </menu>
     </article>
   );

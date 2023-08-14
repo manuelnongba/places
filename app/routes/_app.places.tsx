@@ -17,7 +17,8 @@ export interface PlacesInterface {
 
 export default function Places() {
   const places: string[] = useLoaderData();
-  const hasExpenses = places && places.length > 0;
+
+  const hasPlaces = places && places.length > 0;
 
   return (
     <>
@@ -33,8 +34,8 @@ export default function Places() {
             <span>Load Raw Data</span>
           </a> */}
         </section>
-        {hasExpenses && <PlacesList places={places} />}
-        {!hasExpenses && (
+        {hasPlaces && <PlacesList places={places} />}
+        {!hasPlaces && (
           <section id="no-expenses">
             <h1>No Places found</h1>
             <p>
@@ -54,18 +55,9 @@ export function links() {
 export async function loader({ request }: DataFunctionArgs) {
   const userId = await requireUserSession(request);
 
-  const expenses = await getExpenses(userId);
+  const places = await getExpenses(userId);
 
-  return expenses;
-
-  // if (!expenses || expenses.length === 0) {
-  //   throw json(
-  //     {
-  //       message: `Could not find any expenses.`,
-  //     },
-  //     { status: 404, statusText: 'No expenses found' }
-  //   );
-  // }
+  return places;
 }
 
 // export function ErrorBoundary() {

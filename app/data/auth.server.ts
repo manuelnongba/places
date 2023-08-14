@@ -1,12 +1,12 @@
 import { compare, hash } from 'bcrypt';
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 
-import { prisma } from './database.server.js';
+import { pool } from './database.server.js';
 
 const SESSION_SECRET: string = process.env.SESSION_SECRET!;
 
 interface Credentials {
-  email: string | any;
+  email: string;
   password: string;
 }
 
@@ -65,29 +65,36 @@ export async function requireUserSession(request: any) {
 }
 
 export async function signup({ email, password }: Credentials) {
-  const existingUser = await prisma.user.findFirst({ where: { email } });
+  const sql = `SELECT email FROM users WHERE email = '${email}'`;
 
-  if (existingUser) {
+  const existingUser = await pool.query(sql);
+
+  if (existingUser.rows.length > 0) {
     const error: any = new Error(
       `A user with the provided email address exists already.`
     );
     error.status = 422;
     throw error;
   }
-
   const passwordHash = await hash(password, 12);
 
-  const user = await prisma.user.create({
-    data: { email: email, password: passwordHash },
-  });
+  const sql2 = `INSERT INTO users (email, password) VALUES('${email}', '${passwordHash}')`;
 
-  return createUserSession(user.id, '/places');
+  console.log(sql2);
+  await pool.query(sql2);
+
+  const sql3 = `SELECT id FROM users WHERE email = '${email}'`;
+
+  const newUser = await pool.query(sql3);
+
+  return createUserSession(newUser.rows[0].id, '/places');
 }
 
 export async function login({ email, password }: any) {
-  const existingUser = await prisma.user.findFirst({ where: { email } });
+  const sql = `SELECT id, email, password FROM users WHERE email = '${email}'`;
 
-  if (!existingUser) {
+  const existingUser = await pool.query(sql);
+  if (existingUser.rows.length === 0) {
     const error: any = new Error(
       `Could not log you in, please check the provided credentials`
     );
@@ -95,7 +102,10 @@ export async function login({ email, password }: any) {
     throw error;
   }
 
-  const passwordCorrect = await compare(password, existingUser.password);
+  const passwordCorrect = await compare(
+    password,
+    existingUser.rows[0].password
+  );
 
   if (!passwordCorrect) {
     const error: any = new Error(
@@ -105,5 +115,5 @@ export async function login({ email, password }: any) {
     throw error;
   }
 
-  return createUserSession(existingUser.id, '/places');
+  return createUserSession(existingUser.rows[0].id, '/places');
 }

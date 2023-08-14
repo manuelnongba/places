@@ -18,7 +18,6 @@ export async function action({ request }: DataFunctionArgs) {
 
   try {
     validateCredentials(credentials);
-    console.log(credentials);
   } catch (error) {
     return error;
   }

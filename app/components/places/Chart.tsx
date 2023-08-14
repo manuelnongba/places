@@ -17,8 +17,8 @@ function Chart({ places }: any) {
   ];
 
   for (const place of places) {
-    const expenseMonth: number = new Date(place.date).getMonth(); // starting at 0 => January => 0
-    chartDataPoints[expenseMonth].value += place.amount;
+    const budgetMonth: number = new Date(place.date).getMonth(); // starting at 0 => January => 0
+    chartDataPoints[budgetMonth].value += place.amount;
   }
 
   const dataPointValues: number[] = chartDataPoints.map(

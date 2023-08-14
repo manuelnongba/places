@@ -4,7 +4,7 @@ import { deleteExpense, updateExpense } from '../data/places.server';
 import { redirect } from '@remix-run/node';
 import type { DataFunctionArgs } from '@remix-run/node';
 import { validateExpenseInput } from '../data/validation.server';
-import BudgetForm from '../components/places/PlacesForm';
+import PlaceForm from '../components/places/PlacesForm';
 
 export default function UpdatePlacesPage() {
   const navigate = useNavigate();
@@ -14,17 +14,10 @@ export default function UpdatePlacesPage() {
   }
   return (
     <Modal onClose={closeHandler}>
-      <BudgetForm />
+      <PlaceForm />
     </Modal>
   );
 }
-
-// export async function loader({ params }) {
-//   const expenseId = params.id;
-//   const expense = await getExpense(expenseId);
-//   // return expense;
-//   return json(expense);
-// }
 
 export async function action({ params, request }: DataFunctionArgs) {
   const budgetId = params.id;
@@ -44,7 +37,6 @@ export async function action({ params, request }: DataFunctionArgs) {
   } else if (request.method === 'DELETE') {
     await deleteExpense(budgetId);
 
-    // return redirect('/expenses');
     return { deleteId: budgetId };
   }
 }
