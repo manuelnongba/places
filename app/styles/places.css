@@ -1,19 +1,19 @@
-#no-expenses {
+#no-places {
   text-align: center;
 }
 
-#no-expenses a {
+#no-places a {
   color: var(--color-primary-100);
 }
 
-#expenses-actions {
+#places-actions {
   margin: 2rem 0;
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
 
-#expenses-actions a {
+#places-actions a {
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -23,27 +23,27 @@
   border-radius: 30px;
 }
 
-#expenses-actions a:hover {
+#places-actions a:hover {
   background-color: var(--color-secondary-500);
 }
 
-/* #expenses-actions a:last-of-type {
+/* #places-actions a:last-of-type {
   background-color: transparent;
   color: var(--color-gray-10);
 } */
 
-#expenses-actions a:last-of-type:hover {
+#places-actions a:last-of-type:hover {
   /* background-color: transparent; */
   background-color: var(--color-secondary-500);
   color: var(--color-gray-100);
 }
 
-#expenses-list {
+#places-list {
   max-width: 32rem;
   margin: 2rem auto;
 }
 
-.expense-item {
+.place-item {
   margin: 1.5rem 0;
   padding: 1rem;
   background-color: var(--color-primary-300);
@@ -54,20 +54,20 @@
   color: var(--color-gray-10);
 }
 
-.expense-item.locked {
+.place-item.locked {
   justify-content: center;
   background-color: var(--color-primary-200);
 }
 
-.expense-title {
+.place-title {
   margin: 0;
 }
 
-.expense-amount {
+.place-amount {
   margin: 0;
 }
 
-.expense-actions {
+.place-actions {
   margin: 0;
   padding: 0;
   display: flex;
@@ -75,33 +75,33 @@
   gap: 1rem;
 }
 
-.expense-actions button,
-.expense-actions a {
+.place-actions button,
+.place-actions a {
   background-color: transparent;
   border: none;
   color: var(--color-gray-10);
   padding: 0;
 }
 
-.expense-actions button:hover,
-.expense-actions a:hover {
+.place-actions button:hover,
+.place-actions a:hover {
   color: var(--color-primary-100);
 }
 
-#expense-form {
+#place-form {
   padding: 1rem;
 }
 
-#expense-form .form-actions {
+#place-form .form-actions {
   flex-direction: row-reverse;
   justify-content: flex-start;
 }
 
-#expense-form a {
+#place-form a {
   color: var(--color-gray-400);
 }
 
-#expense-form a:hover {
+#place-form a:hover {
   color: var(--color-gray-500);
 }
 
@@ -132,18 +132,18 @@
   margin-top: 0.5rem;
 }
 
-#expense-statistics {
+#place-statistics {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 2rem;
 }
 
-#expense-statistics dt {
+#place-statistics dt {
   color: var(--color-primary-100);
 }
 
-#expense-statistics dd {
+#place-statistics dd {
   margin: 0;
   color: var(--color-primary-10);
   font-size: 2rem;

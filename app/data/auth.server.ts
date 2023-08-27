@@ -35,7 +35,7 @@ export async function getUserFromSession(request: any) {
     request.headers.get('Cookie')
   );
 
-  const userId = session.get('userId');
+  const userId: number = session.get('userId');
 
   if (!userId) {
     return null;
@@ -65,7 +65,7 @@ export async function requireUserSession(request: any) {
 }
 
 export async function signup({ email, password }: Credentials) {
-  const sql = `SELECT email FROM users WHERE email = '${email}'`;
+  const sql: string = `SELECT email FROM users WHERE email = '${email}'`;
 
   const existingUser = await pool.query(sql);
 
@@ -78,9 +78,8 @@ export async function signup({ email, password }: Credentials) {
   }
   const passwordHash = await hash(password, 12);
 
-  const sql2 = `INSERT INTO users (email, password) VALUES('${email}', '${passwordHash}')`;
+  const sql2: string = `INSERT INTO users (email, password) VALUES('${email}', '${passwordHash}')`;
 
-  console.log(sql2);
   await pool.query(sql2);
 
   const sql3 = `SELECT id FROM users WHERE email = '${email}'`;

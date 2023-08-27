@@ -1,9 +1,9 @@
 import { useNavigate } from '@remix-run/react';
 import Modal from '../components/util/Modal';
-import { deleteExpense, updateExpense } from '../data/places.server';
+import { deletePlace, updatePlace } from '../data/places.server';
 import { redirect } from '@remix-run/node';
 import type { DataFunctionArgs } from '@remix-run/node';
-import { validateExpenseInput } from '../data/validation.server';
+import { validatePlaceInput } from '../data/validation.server';
 import PlaceForm from '../components/places/PlacesForm';
 
 export default function UpdatePlacesPage() {
@@ -20,22 +20,22 @@ export default function UpdatePlacesPage() {
 }
 
 export async function action({ params, request }: DataFunctionArgs) {
-  const budgetId = params.id;
+  const budgetId = +params.id!;
 
   if (request.method === 'PATCH') {
     const formData = await request.formData();
     const budgetData: any = Object.fromEntries(formData);
 
     try {
-      validateExpenseInput(budgetData);
+      validatePlaceInput(budgetData);
     } catch (error) {
       return error;
     }
 
-    await updateExpense(budgetId, budgetData);
-    return redirect('/budgets');
+    await updatePlace(budgetId, budgetData);
+    return redirect('/places');
   } else if (request.method === 'DELETE') {
-    await deleteExpense(budgetId);
+    await deletePlace(budgetId);
 
     return { deleteId: budgetId };
   }

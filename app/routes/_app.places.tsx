@@ -1,13 +1,13 @@
 import { Link, Outlet, useLoaderData } from '@remix-run/react';
-import expensesStyles from '~/styles/places.css';
-import { getExpenses } from '../data/places.server';
+import placesStyles from '~/styles/places.css';
+import { getPlaces } from '../data/places.server';
 import { requireUserSession } from '../data/auth.server';
 import PlacesList from '../components/places/PlacesList';
 import { FaPlus } from 'react-icons/fa';
 import type { DataFunctionArgs } from '@remix-run/node';
 
 export interface PlacesInterface {
-  id: string;
+  id: number;
   title: string;
   amount: number;
   date: string;
@@ -15,28 +15,27 @@ export interface PlacesInterface {
   userId: string;
 }
 
+export interface PlacesProps {
+  places: PlacesInterface[];
+}
+
 export default function Places() {
   const places: string[] = useLoaderData();
-
-  const hasPlaces = places && places.length > 0;
+  const hasPlaces: boolean = places && places.length > 0;
 
   return (
     <>
       <Outlet />
       <main>
-        <section id="expenses-actions">
+        <section id="places-actions">
           <Link to="add">
             <FaPlus />
             <span>Add Place</span>
           </Link>
-          {/* <a href="/places/raw">
-            <FaDownload />
-            <span>Load Raw Data</span>
-          </a> */}
         </section>
         {hasPlaces && <PlacesList places={places} />}
         {!hasPlaces && (
-          <section id="no-expenses">
+          <section id="no-places">
             <h1>No Places found</h1>
             <p>
               Start <Link to="add">add some </Link>today.
@@ -49,13 +48,13 @@ export default function Places() {
 }
 
 export function links() {
-  return [{ rel: 'stylesheet', href: expensesStyles }];
+  return [{ rel: 'stylesheet', href: placesStyles }];
 }
 
 export async function loader({ request }: DataFunctionArgs) {
   const userId = await requireUserSession(request);
 
-  const places = await getExpenses(userId);
+  const places = await getPlaces(userId);
 
   return places;
 }

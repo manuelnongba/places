@@ -1,7 +1,13 @@
+import type { PlacesProps } from '~/routes/_app.places';
 import ChartBar from './ChartBar';
 
-function Chart({ places }: any) {
-  const chartDataPoints = [
+interface ChartData {
+  label: string;
+  value: number;
+}
+
+function Chart({ places }: PlacesProps) {
+  const chartDataPoints: ChartData[] = [
     { label: 'Jan', value: 0 },
     { label: 'Feb', value: 0 },
     { label: 'Mar', value: 0 },
@@ -22,7 +28,7 @@ function Chart({ places }: any) {
   }
 
   const dataPointValues: number[] = chartDataPoints.map(
-    (dataPoint) => dataPoint.value
+    (dataPoint: ChartData) => dataPoint.value
   );
   const totalMaximum: number = Math.max(...dataPointValues);
 

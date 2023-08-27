@@ -1,9 +1,11 @@
+import type { PlacesInterface } from '~/routes/_app.places';
+
 function isValidTitle(value: string) {
   return value && value.trim().length > 0 && value.trim().length <= 30;
 }
 
-function isValidAmount(value: string) {
-  const amount = parseFloat(value);
+function isValidAmount(value: number) {
+  const amount = parseFloat(String(value));
   return !isNaN(amount) && amount > 0;
 }
 
@@ -11,12 +13,12 @@ function isValidDate(value: string) {
   return value && new Date(value).getTime() < new Date().getTime();
 }
 
-export function validateExpenseInput(input: any) {
+export function validatePlaceInput(input: PlacesInterface) {
   let validationErrors: any = {};
 
   if (!isValidTitle(input.title)) {
     validationErrors.title =
-      'Invalid expense title. Must be at most 30 characters long.';
+      'Invalid place title. Must be at most 30 characters long.';
   }
 
   if (!isValidAmount(input.amount)) {

@@ -1,20 +1,20 @@
 import { useMemo } from 'react';
-import { PlacesInterfaces } from '~/routes/_app.places';
+import type { PlacesInterface, PlacesProps } from '~/routes/_app.places';
 
-function calculateSummaryStatistics(places: string[]) {
-  const amounts = places.map((place: any) => +place.amount);
+function calculateSummaryStatistics(places: PlacesInterface[]) {
+  const amounts = places.map((place: PlacesInterface) => +place.amount);
   const maxAmount = Math.max(...amounts);
   const minAmount = Math.min(...amounts);
   const sum = places.reduce(
-    (prevVal: any, curVal: any) => curVal.amount + prevVal,
+    (prevVal: number, curVal: PlacesInterface) => curVal.amount + prevVal,
     0
   );
-  const mean = sum / places.length;
+  const mean: number = sum / places.length;
 
   return { minAmount, maxAmount, sum, mean };
 }
 
-function PlacesStatistics({ places }: any) {
+function PlacesStatistics({ places }: PlacesProps) {
   const { minAmount, maxAmount, sum, mean } = useMemo(
     () => calculateSummaryStatistics(places),
     [places]
@@ -23,22 +23,22 @@ function PlacesStatistics({ places }: any) {
   return (
     <section>
       <h2>Summary Statistics</h2>
-      <dl id="expense-statistics">
+      <dl id="place-statistics">
         <div>
           <dt>Total</dt>
-          <dd>${sum.toFixed(2)}</dd>
+          <dd>¢{sum.toFixed(2)}</dd>
         </div>
         <div>
           <dt>Average</dt>
-          <dd>${mean.toFixed(2)}</dd>
+          <dd>¢{mean.toFixed(2)}</dd>
         </div>
         <div>
           <dt> Min. Amount</dt>
-          <dd>${minAmount.toFixed(2)}</dd>
+          <dd>¢{minAmount.toFixed(2)}</dd>
         </div>
         <div>
           <dt>Max. Amount</dt>
-          <dd>${maxAmount.toFixed(2)}</dd>
+          <dd>¢{maxAmount.toFixed(2)}</dd>
         </div>
       </dl>
     </section>

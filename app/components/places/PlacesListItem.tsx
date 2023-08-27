@@ -1,6 +1,12 @@
 import { Link, useFetcher } from '@remix-run/react';
 
-function PlacesListItem({ id, title, amount }: any) {
+interface PlacesListItemProps {
+  id: number;
+  title: string;
+  amount: number;
+}
+
+function PlacesListItem({ id, title, amount }: PlacesListItemProps) {
   // const submit = useSubmit();
 
   //used to load or submitting requests without triggering navigation actions
@@ -15,19 +21,19 @@ function PlacesListItem({ id, title, amount }: any) {
 
   if (fetcher.state !== 'idle') {
     return (
-      <article className="expense-item locked">
+      <article className="place-item locked">
         <p>Deleting...</p>
       </article>
     );
   }
 
   return (
-    <article className="expense-item">
+    <article className="place-item">
       <div>
-        <h2 className="expense-title">{title}</h2>
-        <p className="expense-amount">${amount.toFixed(2)}</p>
+        <h2 className="place-title">{title}</h2>
+        <p className="place-amount">¢{amount.toFixed(2)}</p>
       </div>
-      <menu className="expense-actions">
+      <menu className="place-actions">
         <button onClick={deletePlaceItemHandler}>Delete</button>
         <Link to={`/places/${id}`}>Edit</Link>
       </menu>

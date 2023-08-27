@@ -1,13 +1,13 @@
 import { useNavigate } from '@remix-run/react';
 import Modal from '../components/util/Modal';
-import { addExpense } from '../data/places.server';
+import { addPlace } from '../data/places.server';
 import { redirect } from '@remix-run/node';
 import type { DataFunctionArgs } from '@remix-run/node';
-import { validateExpenseInput } from '../data/validation.server';
+import { validatePlaceInput } from '../data/validation.server';
 import { requireUserSession } from '../data/auth.server';
 import BudgetForm from '../components/places/PlacesForm';
 
-export default function AddExpensesPage() {
+export default function AddPlacesPage() {
   const navigate = useNavigate();
 
   function closeHandler() {
@@ -23,19 +23,16 @@ export default function AddExpensesPage() {
 
 //all types of requests like 'get' 'post'
 export async function action({ request }: DataFunctionArgs) {
-  const userId = await requireUserSession(request);
-
+  const userId: number = await requireUserSession(request);
   const formData = await request.formData();
-  // formData.get('title');
   const placeData: any = Object.fromEntries(formData);
-  console.log(placeData, formData);
 
   try {
-    validateExpenseInput(placeData);
+    validatePlaceInput(placeData);
   } catch (error) {
     return error;
   }
 
-  await addExpense(placeData, userId);
+  await addPlace(placeData, userId);
   return redirect('/places');
 }

@@ -25,7 +25,7 @@ export default function Index() {
       </section>
       <section className="marketing-section">
         <header>
-          <FaChartBar />
+          <FaChartBar className="analytics-logo" />
           <h2>Detailed Analytics</h2>
         </header>
         <div className="marketing-content">

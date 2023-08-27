@@ -1,16 +1,16 @@
 import { Outlet } from '@remix-run/react';
-import expensesStyles from '~/styles/places.css';
-import BudgetHeader from '../components/navigation/BugdetHeader';
+import placesStyles from '~/styles/places.css';
+import PlacesHeader from '../components/navigation/PlacesHeader';
 
 export default function BudgetAppLayout() {
   return (
     <>
-      <BudgetHeader />
+      <PlacesHeader />
       <Outlet />
     </>
   );
 }
 
 export function links() {
-  return [{ rel: 'stylesheet', href: expensesStyles }];
+  return [{ rel: 'stylesheet', href: placesStyles }];
 }

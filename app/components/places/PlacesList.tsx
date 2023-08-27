@@ -1,10 +1,10 @@
-import type { PlacesInterface } from '~/routes/_app.places';
+import type { PlacesInterface, PlacesProps } from '~/routes/_app.places';
 
 import PlacesListItem from './PlacesListItem';
 
-function PlacesList({ places }: any) {
+function PlacesList({ places }: PlacesProps) {
   return (
-    <ol id="expenses-list">
+    <ol id="places-list">
       {places.map((place: PlacesInterface) => (
         <li key={place.id}>
           <PlacesListItem

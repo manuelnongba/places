@@ -14,13 +14,13 @@ function PlaceForm() {
   const matches = useMatches();
   const params = useParams();
 
-  const places = matches.find(
+  const places: PlacesInterface[] = matches.find(
     (match) => match.id === 'routes/_app.places'
   )!.data;
 
   const placeData: PlacesInterface = places.find((place: PlacesInterface) => {
-    return place.id == params.id;
-  });
+    return place.id == +params.id!;
+  })!;
 
   const navigation = useNavigation();
 
@@ -28,7 +28,7 @@ function PlaceForm() {
     return <p>Invalid Place id</p>;
   }
 
-  const isSubmitting = navigation.state !== 'idle';
+  const isSubmitting: boolean = navigation.state !== 'idle';
 
   const defaultValues = placeData
     ? {
@@ -46,7 +46,7 @@ function PlaceForm() {
     <Form
       method={placeData ? 'patch' : 'post'}
       className="form"
-      id="expense-form"
+      id="place-form"
       // onSubmit={submitHandler}
     >
       <p>
@@ -97,7 +97,7 @@ function PlaceForm() {
       )}
       <div className="form-actions">
         <button disabled={isSubmitting}>
-          {isSubmitting ? 'Saving...' : 'Save Expense'}
+          {isSubmitting ? 'Saving...' : 'Save Place'}
         </button>
         <Link to="..">Cancel</Link>
       </div>
