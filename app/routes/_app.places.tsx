@@ -20,7 +20,7 @@ export interface PlacesProps {
 }
 
 export default function Places() {
-  const places: string[] = useLoaderData();
+  const places: PlacesInterface[] = useLoaderData();
   const hasPlaces: boolean = places && places.length > 0;
 
   return (
