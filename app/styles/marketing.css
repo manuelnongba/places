@@ -1,5 +1,5 @@
 .marketing-section {
-  margin: 6rem auto;
+  margin: 6rem 1rem;
 }
 
 .marketing-section header {
@@ -59,4 +59,10 @@
 
 .marketing-explanation {
   width: 50%;
+}
+
+@media (max-width: 290px) {
+  .marketing-section h2 {
+    font-size: 1.2rem;
+  }
 }

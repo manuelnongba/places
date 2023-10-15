@@ -37,3 +37,9 @@
 .icon-img svg {
   animation: fade-slide-up 1.5s ease-out forwards;
 }
+
+@media (max-width: 420px) {
+  #auth-form {
+    max-width: 20rem;
+  }
+}

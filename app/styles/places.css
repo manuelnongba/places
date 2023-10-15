@@ -148,3 +148,21 @@
   color: var(--color-primary-10);
   font-size: 2rem;
 }
+
+@media (max-width: 500px) {
+  .chart {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 420px) {
+  #place-form {
+    width: 22rem;
+  }
+}
+
+@media (max-width: 380px) {
+  #place-form {
+    width: 16rem;
+  }
+}

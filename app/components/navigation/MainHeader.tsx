@@ -7,7 +7,6 @@ function MainHeader() {
   return (
     <header id="main-header">
       <Logo />
-      <nav id="main-nav"></nav>
       <nav id="cta-nav">
         <ul>
           <li>
