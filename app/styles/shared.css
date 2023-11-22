@@ -43,7 +43,6 @@ body {
     url('../../public/images/bg.jpg');
   background-size: cover;
   overflow-x: hidden;
-  height: 100%;
 }
 
 ul,

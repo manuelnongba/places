@@ -8,9 +8,10 @@ export interface placeData {
 
 export async function addPlace(placeData: placeData, userId: number) {
   try {
-    const sql = `INSERT INTO places (title, amount, date, userId) VALUES ('${
-      placeData.title
-    }', ${+placeData.amount}, '${placeData.date}', ${userId});`;
+    const sql = `INSERT INTO places (title, amount, date, userId) VALUES (E'${placeData.title.replaceAll(
+      "'",
+      "\\'"
+    )}', ${+placeData.amount}, '${placeData.date}', ${userId});`;
 
     return await pool.query(sql);
   } catch (error) {
@@ -45,11 +46,15 @@ export async function getPlace(id: number) {
 
 export async function updatePlace(id: any, placeData: placeData) {
   try {
-    const sql = `UPDATE places SET title = '${placeData.title}', amount = ${placeData.amount}, date = '${placeData.date}' WHERE id = ${id}`;
+    const sql = `UPDATE places SET title = E'${placeData.title.replaceAll(
+      "'",
+      "\\'"
+    )}', amount = ${placeData.amount}, date = '${
+      placeData.date
+    }' WHERE id = ${id}`;
 
     await pool.query(sql);
   } catch (err) {
-    console.log(err);
     throw new Error('Failed to update place');
   }
 }

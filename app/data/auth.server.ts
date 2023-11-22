@@ -4,6 +4,7 @@ import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { pool } from './database.server.js';
 
 const SESSION_SECRET: string = process.env.SESSION_SECRET!;
+console.log(SESSION_SECRET);
 
 interface Credentials {
   email: string;
@@ -65,7 +66,7 @@ export async function requireUserSession(request: any) {
 }
 
 export async function signup({ email, password }: Credentials) {
-  const sql: string = `SELECT email FROM users WHERE email = '${email}'`;
+  const sql: string = `SELECT email FROM places_users WHERE email = '${email}'`;
 
   const existingUser = await pool.query(sql);
 
@@ -78,11 +79,11 @@ export async function signup({ email, password }: Credentials) {
   }
   const passwordHash = await hash(password, 12);
 
-  const sql2: string = `INSERT INTO users (email, password) VALUES('${email}', '${passwordHash}')`;
+  const sql2: string = `INSERT INTO places_users (email, password) VALUES('${email}', '${passwordHash}')`;
 
   await pool.query(sql2);
 
-  const sql3 = `SELECT id FROM users WHERE email = '${email}'`;
+  const sql3 = `SELECT id FROM places_users WHERE email = '${email}'`;
 
   const newUser = await pool.query(sql3);
 
@@ -90,7 +91,7 @@ export async function signup({ email, password }: Credentials) {
 }
 
 export async function login({ email, password }: any) {
-  const sql = `SELECT id, email, password FROM users WHERE email = '${email}'`;
+  const sql = `SELECT id, email, password FROM places_users WHERE email = '${email}'`;
 
   const existingUser = await pool.query(sql);
   if (existingUser.rows.length === 0) {

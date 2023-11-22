@@ -10,7 +10,7 @@ exports.up = (pgm) => {
     amount INTEGER NOT NULL,
     date timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
     dateAdded timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-    userId INTEGER REFERENCES users(id) NOT NULL
+    userId INTEGER REFERENCES places_users(id) NOT NULL
     )
   `);
 };

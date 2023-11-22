@@ -41,6 +41,9 @@
 #places-list {
   max-width: 32rem;
   margin: 2rem auto;
+  height: 76vh;
+  overflow-y: scroll;
+  scroll-behavior: auto;
 }
 
 .place-item {

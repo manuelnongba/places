@@ -38,7 +38,7 @@ export default function Places() {
           <section id="no-places">
             <h1>No Places found</h1>
             <p>
-              Start <Link to="add">add some </Link>today.
+              <Link to="add">Add some </Link>today.
             </p>
           </section>
         )}
