@@ -4,7 +4,6 @@ import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { pool } from './database.server.js';
 
 const SESSION_SECRET: string = process.env.SESSION_SECRET!;
-console.log(SESSION_SECRET);
 
 interface Credentials {
   email: string;
@@ -94,6 +93,8 @@ export async function login({ email, password }: any) {
   const sql = `SELECT id, email, password FROM places_users WHERE email = '${email}'`;
 
   const existingUser = await pool.query(sql);
+  console.log(pool);
+
   if (existingUser.rows.length === 0) {
     const error: any = new Error(
       `Could not log you in, please check the provided credentials`

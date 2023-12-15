@@ -25,6 +25,9 @@ export async function action({ request }: DataFunctionArgs) {
   try {
     if (authMode === 'login') {
       //login logic
+
+      console.log(await login(credentials));
+
       return await login(credentials);
     } else {
       //sign up logic
